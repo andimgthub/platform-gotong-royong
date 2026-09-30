@@ -1,6 +1,6 @@
 # PGR — Platform Gotong Royong
 
-**Status**: File pembuka independen  
+**Status**: File pembuka independen, emotional trigger
 **Lisensi**: CC-BY-SA 4.0  
 **Tanggal**: 2026-09-30  
 **Bahasa**: **sarkasme**
