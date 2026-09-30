@@ -1,11 +1,18 @@
+# ============================================================
+# _headers — Security & cache headers
+# Berlaku di Cloudflare Pages. Di Cloudflare Workers dengan
+# Static Assets, dukungan _headers bisa berbeda — kalau header
+# tidak muncul di response, andalkan CSP meta di index.html.
+# ============================================================
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
 
-# Cache untuk file statis
+# ---- Cache: file aplikasi (berversi manual) ----
 /web/style.css
   Cache-Control: public, max-age=3600, must-revalidate
 
@@ -15,16 +22,10 @@
 /web/theme-init.js
   Cache-Control: public, max-age=3600, must-revalidate
 
-/web/vendor/marked.min.js
-  Cache-Control: public, max-age=31536000, immutable
-
-/web/vendor/purify.min.js
-  Cache-Control: public, max-age=31536000, immutable
-
 /web/files.json
   Cache-Control: public, max-age=300, must-revalidate
 
-# Dokumen Markdown
+# ---- Cache: dokumen Markdown ----
 /*.md
   Cache-Control: public, max-age=300, must-revalidate
 
@@ -32,4 +33,11 @@
   Cache-Control: public, max-age=300, must-revalidate
 
 /metadata/*.md
+  Cache-Control: public, max-age=300, must-revalidate
+
+# ---- Cache: HTML entry point ----
+/index.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+/
   Cache-Control: public, max-age=300, must-revalidate
