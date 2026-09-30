@@ -1,0 +1,20 @@
+{
+  "documents": [
+    { "id": "readme",       "title": "README",                             "path": "README.md" },
+    { "id": "mst-bag1",     "title": "Master — Identitas & Prinsip",       "path": "master/PGR-MST-bag1.md" },
+    { "id": "mst-bag2",     "title": "Master — Model Ekonomi & Simulasi",  "path": "master/PGR-MST-bag2.md" },
+    { "id": "mst-bag3",     "title": "Master — Model Layanan",             "path": "master/PGR-MST-bag3.md" },
+    { "id": "mst-bag4",     "title": "Master — Kelembagaan & Governance",  "path": "master/PGR-MST-bag4.md" },
+    { "id": "mst-bag5",     "title": "Master — Prinsip & Fase Proyek",     "path": "master/PGR-MST-bag5.md" },
+    { "id": "mst-lampiranA", "title": "Lampiran A — Glosarium Lengkap",    "path": "master/PGR-MST-LampiranA.md" },
+    { "id": "mst-lampiranB", "title": "Lampiran B — Referensi Hukum",      "path": "master/PGR-MST-LampiranB.md" },
+    { "id": "mst-lampiranC", "title": "Lampiran C — Simulasi & Perbandingan", "path": "master/PGR-MST-LampiranC.md" },
+    { "id": "documentation", "title": "Panduan Dokumentasi",               "path": "metadata/DOCUMENTATION.md" },
+    { "id": "contributors",  "title": "Perintis & Kontributor",            "path": "metadata/CONTRIBUTORS.md" },
+    { "id": "donation",      "title": "Status Donasi & Disclaimer",        "path": "metadata/DONATION.md" },
+    { "id": "timeline",      "title": "Milestone Proyek",                  "path": "metadata/TIMELINE.md" },
+    { "id": "financial",     "title": "Catatan Keuangan",                  "path": "metadata/FINANCIAL.md" },
+    { "id": "changelog",     "title": "Changelog",                         "path": "metadata/CHANGELOG.md" },
+    { "id": "notice",       "title": "Notice of Attribution",              "path": "NOTICE.md" }
+  ]
+}
