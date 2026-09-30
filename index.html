@@ -1,0 +1,103 @@
+<!--
+  index.html — Entry point aplikasi memudahkan pembaca PGR
+  Versi: 1.3
+  Lisensi: MIT
+  Repositori: https://github.com/andimgthub/platform-gotong-royong/
+-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!--
+  CSP meta. Catatan:
+  - CSP via <meta> TIDAK menghormati 'frame-ancestors', 'report-uri',
+    dan 'sandbox'. Header tersebut hanya berlaku lewat HTTP header
+    (lihat file _headers untuk Cloudflare Pages).
+  - marked & DOMPurify di-host sendiri di web/vendor/, jadi
+    script-src cukup 'self' — tidak perlu whitelist CDN.
+  - Tidak ada 'unsafe-inline' / 'unsafe-eval'.
+-->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self';
+               img-src 'self' data: https:;
+               font-src 'self';
+               connect-src 'self';
+               object-src 'none';
+               base-uri 'none';
+               form-action 'none'">
+
+<title>Platform Gotong Royong</title>
+<meta name="description" content="Pembaca dokumen Platform Gotong Royong">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="web/style.css">
+
+<!-- Anti-FOUC: harus sinkron, sebelum paint. -->
+<script src="web/theme-init.js"></script>
+
+<!-- Vendor scripts: di-host sendiri, same-origin, tidak butuh SRI. -->
+<script defer src="web/vendor/marked.min.js"></script>
+<script defer src="web/vendor/purify.min.js"></script>
+<script defer src="web/app.js"></script>
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<section id="view-home" class="view">
+  <main class="home">
+    <h1 class="home-title">Platform Gotong Royong</h1>
+
+    <blockquote class="home-quote">
+      <p>Gagasan ini lahir untuk mengobati sakit kepala, gelisah tidur, masuk angin, kepanasan saat demo, hingga keretakan rumah tangga akibat lucunya kondisi sosial-ekonomi: drama konflik konsumen vs driver, merchant vs driver, serta mitra individu vs vendor sewa kendaraan yang lebih banyak derita daripada cinta.</p>
+      <p><i>KEMAMPUAN memperbaiki keadaan tidaklah sama dengan KEMAUAN untuk melakukannya.</i></p>
+    </blockquote>
+
+    <button id="btn-start" class="btn-primary" type="button">Silakan Masuk</button>
+
+    <footer class="home-footer">
+      <p>Web ini hanya untuk memudahkan pembacaan.</p>
+      <p>Untuk repository kunjungi: <a href="https://github.com/andimgthub/platform-gotong-royong" target="_blank" rel="noopener noreferrer"><strong>REPO GITHUB</strong></a></p>
+      <br>
+      <a href="https://heylink.me/andimhey/" target="_blank" rel="noopener noreferrer"><strong>andimhey</strong></a>
+    </footer>
+  </main>
+</section>
+
+<!-- ================= READER ================= -->
+<section id="view-reader" class="view" hidden>
+  <header class="reader-header">
+    <button id="btn-home" class="icon-btn" type="button" aria-label="Beranda" title="Beranda">🏠</button>
+    <h2 id="doc-title" class="reader-title">…</h2>
+    <span id="doc-version" class="reader-version"></span>
+    <a class="icon-btn" href="https://heylink.me/andimhey/"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Tautan eksternal" title="Tautan eksternal">🧭</a>
+  </header>
+
+  <article id="doc-content" class="markdown">
+    <p class="loading">Memuat dokumen…</p>
+  </article>
+
+  <footer class="reader-footer">
+    <button id="btn-back" class="icon-btn" type="button" aria-label="Kembali" title="Kembali">⬅️</button>
+    <button id="btn-toc" class="icon-btn" type="button" aria-label="Daftar Isi" title="Daftar Isi">📑</button>
+    <button id="btn-theme" class="icon-btn" type="button" aria-label="Ubah tema" title="Ubah tema">☀️</button>
+    <button id="btn-next" class="icon-btn" type="button" aria-label="Berikutnya" title="Berikutnya">➡️</button>
+  </footer>
+</section>
+
+<!-- ================= TOC DRAWER ================= -->
+<div id="toc-overlay" class="overlay" hidden></div>
+<aside id="toc-drawer" class="drawer" hidden aria-label="Daftar Isi">
+  <div class="drawer-head">
+    <strong>Daftar Isi</strong>
+    <button id="btn-toc-close" class="icon-btn" type="button" aria-label="Tutup" title="Tutup">❌</button>
+  </div>
+  <nav id="toc-list" class="toc-list"></nav>
+</aside>
+
+</body>
+</html>

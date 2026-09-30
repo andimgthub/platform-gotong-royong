@@ -1,0 +1,35 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Cache untuk file statis
+/web/style.css
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/web/app.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/web/theme-init.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/web/vendor/marked.min.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/web/vendor/purify.min.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/web/files.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Dokumen Markdown
+/*.md
+  Cache-Control: public, max-age=300, must-revalidate
+
+/master/*.md
+  Cache-Control: public, max-age=300, must-revalidate
+
+/metadata/*.md
+  Cache-Control: public, max-age=300, must-revalidate
