@@ -1,6 +1,6 @@
 /*
  * style.css — Styling aplikasi memudahkan pembaca PGR
- * versi: 1.0
+ * versi: 1.1
  * Lisensi: MIT
  * Repositori: https://github.com/andimgthub/platform-gotong-royong/
  */
@@ -93,6 +93,37 @@ a { color: var(--accent); }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-primary:active { transform: scale(.97); }
+
+/* Tombol sekunder: mild, hanya border, tanpa warna isi. */
+.btn-secondary {
+  display: inline-block;
+  padding: .65rem 1.3rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: .875rem;
+  transition: border-color .15s ease, color .15s ease, transform .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-secondary:active { transform: scale(.97); }
+.btn-secondary:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+.btn-secondary.copied {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copy-hint {
+  margin: 0;
+  font-size: .75rem;
+  color: var(--muted);
+  max-width: 320px;
+  line-height: 1.4;
+}
 
 .home-status {
   display: grid;

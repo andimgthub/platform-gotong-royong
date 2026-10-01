@@ -1,6 +1,6 @@
 /*
  * app.js — Logika aplikasi memudahkan pembaca PGR
- * versi: 1.2
+ * versi: 1.3
  * Lisensi: MIT
  * Repositori: https://github.com/andimgthub/platform-gotong-royong/
  */
@@ -13,6 +13,7 @@
     viewHome:     $('#view-home'),
     viewReader:   $('#view-reader'),
     btnStart:     $('#btn-start'),
+    btnCopyPrompt: $('#btn-copy-prompt'),
     btnHome:      $('#btn-home'),
     btnBack:      $('#btn-back'),
     btnToc:       $('#btn-toc'),
@@ -32,6 +33,104 @@
     currentId: null,
     currentIndex: -1,
   };
+
+  /* ---------- Prompt AI untuk pembaca ---------- */
+  const AI_PROMPT = `PROMPT ANALISIS PGR
+
+Peran
+
+Anda adalah analis konsep dan peneliti independen. Pelajari dokumen PGR (Platform Gotong Royong) sebagai naskah konsep alternatif untuk platform kemitraan digital (transportasi online, kurir, marketplace) dari sudut pandang kehidupan sehari-hari masyarakat umum.
+
+Bayangkan pembaca adalah orang yang menggunakan ojek/taksi online, memesan makanan, mengirim barang, berjualan sebagai merchant, bekerja sebagai pengemudi/kurir, atau konsumen yang ingin memahami cara kerja platform digital.
+
+Tujuan: membantu orang awam memahami pertanyaan "Kalau model platformnya berbeda, apa yang sebenarnya berubah dalam kehidupan sehari-hari?"
+
+Jangan menganggap PGR pasti lebih baik atau lebih buruk. Jelaskan mekanisme, konsekuensi, keterbatasan, dan hal yang masih perlu dibuktikan.
+
+Sumber Dokumen
+
+Akses:
+- Repositori: https://github.com/andimgthub/platform-gotong-royong
+- Website: https://platform-gotong-royong.andimcfr.workers.dev/
+
+Prioritaskan file: README.md, master/PGR-MST-bag1.md s.d. bag5.md, master/PGR-MST-LampiranA.md s.d. LampiranC.md, seluruh file di metadata/, dan NOTICE.md.
+
+Gunakan repositori sebagai sumber utama. Website untuk memahami cara konsep disajikan.
+
+Status Dokumen — WAJIB DIPATUHI
+
+PGR adalah DRAFT KONSEPTUAL. Banyak angka berstatus [SIM-ILLUST]. Beberapa bagian berstatus [TBD] (belum ditentukan) atau [LAW] (butuh verifikasi hukum). Jangan memperlakukan rancangan sebagai sistem yang sudah berjalan. Jangan mengarang angka, data, pengalaman pengguna, atau klaim hukum yang tidak ada di dokumen. Jika dokumen mengatakan suatu mekanisme "dapat" berdampak, jangan mengubahnya menjadi "akan".
+
+Pemisahan Fakta dan Analisis
+
+Selalu bedakan:
+- Fakta dari dokumen: apa yang tertulis atau terancang dalam PGR.
+- Interpretasi: arti mekanisme jika diterapkan.
+- Analisis: konsekuensi, kemungkinan, risiko, pertanyaan.
+- Hal yang belum diketahui: yang belum dapat disimpulkan dari dokumen.
+
+Tugas Analisis
+
+1. PGR dalam satu gambaran sederhana
+PGR mencoba membuat apa, masalah apa yang ingin dijawab, siapa terlibat, dari mana biaya platform berasal. Gunakan bahasa sehari-hari.
+
+2. Bagaimana uang bergerak
+Ikuti alur: pengguna membayar, uang masuk, biaya operasional, pembagian pendapatan, surplus, dan penggunaannya.
+Bahas: biaya layanan, komisi, Poin Partisipasi, SHU, cadangan, dana sosial, break-even, threshold.
+Untuk setiap mekanisme, jelaskan: "Dalam kehidupan sehari-hari, ini berarti apa?" Tandai angka ilustratif sebagai simulasi.
+
+3. Perbandingan dengan platform komersial
+Fokus pada mekanisme, bukan perusahaan tertentu. Bandingkan aspek: sumber pendapatan, penentu tarif, kepemilikan, pembagian order, ke mana surplus pergi, penentu aturan, tujuan ekonomi, risiko yang ditanggung.
+Setelah tabel, jelaskan arti perbedaan tersebut bagi orang biasa.
+
+4. Pengalaman setiap pihak
+Analisis dari sudut pandang:
+- Konsumen: tarif, hak, kualitas layanan.
+- Pengemudi/kurir: pendapatan, komisi, order, hak keputusan.
+- Merchant: biaya, aturan, manfaat.
+- Pengelola platform: biaya operasional, keputusan investasi.
+- Masyarakat: akses, manfaat ekonomi, konsekuensi sosial.
+
+5. Bagian yang sulit diwujudkan
+Kelompokkan menjadi: sudah dijelaskan, masih asumsi, [SIM-ILLUST], [TBD], [LAW], belum cukup dijelaskan.
+Untuk setiap temuan, jelaskan mengapa hal itu penting dalam kehidupan nyata.
+
+6. Uji dengan pertanyaan sederhana
+Jawab pertanyaan seperti: "Kalau saya pesan ojol, saya bayar berapa?" "Uangnya masuk ke siapa?" "Kalau driver tidak dapat order, siapa bertanggung jawab?" "Kalau platform rugi, siapa menanggung?" "Saya punya suara atau tidak?" "Kalau sistem dimiliki bersama, siapa sebenarnya mengambil keputusan?" Tambahkan pertanyaan lain dari dokumen.
+
+7. Bedakan konsep, mekanisme, asumsi, simulasi, bukti
+Jangan mengubah rancangan menjadi seolah-olah sudah berjalan.
+
+8. Apa yang menarik dari konsep ini
+Perbedaan paling mendasar dengan model komersial, mekanisme paling tidak biasa, potensi perubahan hubungan antar pihak, pertanyaan baru, bagian yang menarik untuk diuji. Jelaskan kondisi yang diperlukan agar manfaat potensial benar-benar terjadi.
+
+9. Contoh kehidupan sehari-hari
+Buat contoh sederhana berdasarkan mekanisme yang ada di dokumen, misalnya "Bayangkan Anda memesan perjalanan..." atau "Bayangkan platform di bawah threshold...". Jangan membuat angka atau asumsi baru.
+
+10. Tutup dengan pertanyaan, bukan kesimpulan final
+Ajukan pertanyaan dalam kelompok: untuk memahami, untuk menguji, untuk membandingkan, untuk berkontribusi, dan 3 sampai 5 pertanyaan terbuka dari isi dokumen.
+
+Format Jawaban
+
+Gunakan Bahasa Indonesia yang mudah dipahami masyarakat umum. Utamakan bahasa konkret dan contoh sehari-hari. Hindari gaya laporan akademik.
+
+Struktur disarankan:
+- PGR dalam satu gambaran
+- Bagaimana uang bergerak
+- Perbandingan dengan platform komersial
+- Arti bagi konsumen
+- Arti bagi pengemudi/kurir
+- Arti bagi merchant
+- Arti bagi pengelola platform
+- Bagian yang masih asumsi atau belum selesai
+- Hal menarik untuk diuji
+- Contoh sehari-hari
+- Pertanyaan untuk pendalaman
+- Bagaimana masyarakat dapat berkontribusi
+
+Untuk klaim spesifik, sertakan rujukan bagian dokumen, misalnya BAG1 §1.2, BAG2 §2.4.2, BAG3 §3.1, Lampiran A. Jika nomor bagian tersedia, gunakan nomor tersebut.
+
+Tujuan analisis bukan untuk mempromosikan PGR, melainkan membuat konsep yang kompleks menjadi cukup sederhana agar masyarakat biasa dapat memahami cara kerjanya, melihat perbedaannya, mempertanyakan asumsinya, dan menentukan sendiri bagian mana yang layak didalami atau dikontribusikan.`;
 
   // Controller untuk membatalkan fetch dokumen yang sudah usang.
   let currentAbort = null;
@@ -365,6 +464,37 @@
     else goHome();
   }
 
+  /* ---------- Copy Prompt ---------- */
+  async function copyPrompt() {
+    const btn = els.btnCopyPrompt;
+    const original = btn.textContent;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(AI_PROMPT);
+      } else {
+        // Fallback untuk konteks non-secure / browser lawas.
+        const ta = document.createElement('textarea');
+        ta.value = AI_PROMPT;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      btn.textContent = '✅ Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 2000);
+    } catch (e) {
+      console.error('copy failed', e);
+      btn.textContent = '⚠️ Gagal menyalin';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    }
+  }
+
   /* ---------- Init ---------- */
   async function init() {
     // Ikon tema yang benar sejak awal
@@ -406,6 +536,7 @@
 
   function bindEvents() {
     els.btnStart.addEventListener('click', () => goDoc('readme'));
+    els.btnCopyPrompt.addEventListener('click', copyPrompt);
     els.btnHome.addEventListener('click', goHome);
     els.btnBack.addEventListener('click', goBack);
     els.btnNext.addEventListener('click', goNext);
